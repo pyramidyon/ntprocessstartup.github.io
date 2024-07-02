@@ -5,9 +5,9 @@
   --sl-font-system-mono: "Space Mono", monospace;
 
   /* Dark mode colors */
-	--sl-color-accent-low: #3c0017;
-	--sl-color-accent: #bd0249;
-	--sl-color-accent-high: #ff78ac;
+	--sl-color-accent-low: #66b80f;
+	--sl-color-accent: #a1bd02;
+	--sl-color-accent-high: #c0ff78;
 	--sl-color-white: #ffffff;
 	--sl-color-gray-1: #c2c2c2;
 	--sl-color-gray-2: #a3a3a3;

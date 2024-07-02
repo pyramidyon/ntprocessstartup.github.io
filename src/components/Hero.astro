@@ -11,8 +11,8 @@ const { title = data.title, tagline, image, actions = [] } = data.hero || {};
 const imageAttrs = {
 	loading: 'eager' as const,
 	decoding: 'async' as const,
-	width: 400,
-	height: 400,
+	width: 800,
+	height: 600,
 	alt: image?.alt || '',
 };
 
@@ -71,7 +71,7 @@ const titleHTML = title.split(" ").map((titlePart: string) => {
 	.hero > img,
 	.hero > .hero-html {
 		object-fit: contain;
-		width: min(70%, 20rem);
+		width: min(80%, 20rem);
 		height: auto;
 		margin-inline: auto;
 	}

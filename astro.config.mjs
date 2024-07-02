@@ -6,7 +6,10 @@ export default defineConfig({
   site: 'https://ntprocessstartup.github.io',
   base: '/',
   integrations: [starlight({
-    title: 'Ion Theme',
+    title: 'NtProcessStartu',
+    editLink: {
+      baseUrl: 'https://github.com/pyramidyon/ntprocessstartup.github.io/edit/main/docs/',
+    },
     logo: {
       src: './src/assets/ion-logo.svg'
     },
@@ -16,18 +19,37 @@ export default defineConfig({
     sidebar: [{
       label: '[home] Home',
       link: '/'
-    }, {
-      label: '[list] Features',
+    }, 
+    {
+      label: 'Introduction',
+      link: '/introduction/'
+    }, 
+    {
+      label: 'Knowledgebase',
       link: '/features/'
-    }, {
+    }, 
+    {
+      label: '[rocket] Setup',
+      autogenerate: {
+        directory: 'setup'
+      }
+    }, 
+    {
       label: '[box] Guides',
       autogenerate: {
         directory: 'guides'
       }
-    }, {
-      label: '[book] Reference',
+    }, 
+    {
+      label: '[list] Features',
       autogenerate: {
-        directory: 'reference'
+        directory: 'guides'
+      }
+    }, 
+    {
+      label: '[book] Examples',
+      autogenerate: {
+        directory: 'examples'
       }
     }],
     components: {
