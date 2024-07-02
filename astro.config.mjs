@@ -20,13 +20,17 @@ export default defineConfig({
       link: '/'
     }, 
     {
-      label: '[list] Features',
-      link: '/features/'
+      label: '[list] Intro',
+      link: '/introduction/'
     }, 
     {
       label: '[box] Codes',
       autogenerate: { directory: 'codes' },
-    }
+     },
+        {
+            label: '[rocket] Knowledgebase',
+            autogenerate: { directory: 'knowledgebase' },
+        }
   ],
     components: {
       ThemeProvider: './src/components/ThemeProvider.astro',

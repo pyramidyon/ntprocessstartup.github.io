@@ -1,0 +1,28 @@
+---
+title: Safemode / Safeboot
+description: Native applications run from the registry are still executed when Windows boots in safemode.
+---
+
+In my development journey, I've made some regrettable decisions, like testing my application on my main computer. This native application crashed, causing a blue screen of death (BSOD) and presenting a significant obstacle to overcome. 
+
+## Options Considered
+
+Faced with this challenge, I considered several options to remove the problematic registry key or file:
+
+### Running in Windows Safemode
+
+I initially thought running Windows in safemode would be a simple solution. I assumed that Windows wouldn't execute my native application from the registry in this mode. However, to my surprise, the native application was still executed even when attempting to boot 'safely.' This unexpected behavior complicated my troubleshooting efforts significantly.
+
+#### Booting from a USB Drive
+
+Lacking a USB drive at the moment, I couldn't pursue this option immediately. However, booting from a USB drive is generally a reliable way to access the system without triggering the faulty application.
+
+#### Using the Fix/Repair Option
+
+Ultimately, I resorted to using the 'fix/repair' option available within the Windows recovery environment. Although this process took a considerable amount of time, it proved effective in resolving the issue. The repair process allowed me to bypass the problematic application and regain control of my system.
+
+#### Conclusion
+
+This experience taught me valuable lessons about the importance of testing applications in controlled environments. 
+It also highlighted the persistence of registry-executed applications, 
+even in safemode, and might bring up some idea's in the future.
