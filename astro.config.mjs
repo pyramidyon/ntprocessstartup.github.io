@@ -6,52 +6,28 @@ export default defineConfig({
   site: 'https://ntprocessstartup.github.io',
   base: '/',
   integrations: [starlight({
-    title: 'NtProcessStartu',
-    editLink: {
-      baseUrl: 'https://github.com/pyramidyon/ntprocessstartup.github.io/edit/main/docs/',
-    },
-    logo: {
+    title: 'NtProcessStartup',
+    logo: 
+    {
       src: './src/assets/ion-logo.svg'
     },
     social: {
       github: 'https://github.com/pyramidyon'
     },
-    sidebar: [{
+    sidebar: [
+    {
       label: '[home] Home',
       link: '/'
     }, 
     {
-      label: 'Introduction',
-      link: '/introduction/'
-    }, 
-    {
-      label: 'Knowledgebase',
+      label: '[list] Features',
       link: '/features/'
     }, 
     {
-      label: '[rocket] Setup',
-      autogenerate: {
-        directory: 'setup'
-      }
-    }, 
-    {
-      label: '[box] Guides',
-      autogenerate: {
-        directory: 'guides'
-      }
-    }, 
-    {
-      label: '[list] Features',
-      autogenerate: {
-        directory: 'guides'
-      }
-    }, 
-    {
-      label: '[book] Examples',
-      autogenerate: {
-        directory: 'examples'
-      }
-    }],
+      label: '[box] Codes',
+      autogenerate: { directory: 'codes' },
+    }
+  ],
     components: {
       ThemeProvider: './src/components/ThemeProvider.astro',
       ThemeSelect: './src/components/ThemeSelect.astro',
@@ -59,7 +35,6 @@ export default defineConfig({
       Sidebar: './src/components/Sidebar.astro',
       Pagination: './src/components/Pagination.astro',
       Hero: './src/components/Hero.astro',
-      PostComments: './src/components/PostComments.astro',
     },
     customCss: [
       '@fontsource-variable/space-grotesk/index.css',

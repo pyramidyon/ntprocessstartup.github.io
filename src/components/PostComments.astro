@@ -1,27 +1,25 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
-const { slug } = Astro.props;
-const isHomepage = slug === '';
+const isHomePage = Astro.url.pathname;
 ---
 
-{
-  !isHomepage && (
-    <section class="giscus mx-auto mt-10 w-full">
-      <script src="https://giscus.app/client.js"
-              data-repo="pyramidyon/ntprocessstartup.github.io"
-              data-repo-id="R_kgDOMQ9TkA"
-              data-category="Blog Posts Comments"
-              data-category-id="DIC_kwDOMQ9TkM4CghuC"
-              data-mapping="url"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="bottom"
-              data-theme="transparent_dark"
-              data-lang="en"
-              crossorigin="anonymous"
-              async>
-      </script>
-    </section>
-  )
-}
+{isHomePage === '/' ? 
+    ''
+  
+  : <section class="giscus mx-auto mt-1 w-1/2">
+    <script src="https://giscus.app/client.js"
+            data-repo="pyramidyon/ntprocessstartup.github.io"
+            data-repo-id="R_kgDOMQ9TkA"
+            data-category="Blog Posts Comments"
+            data-category-id="DIC_kwDOMQ9TkM4CghuC"
+            data-mapping="url"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="transparent_dark"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </section>
+  }
