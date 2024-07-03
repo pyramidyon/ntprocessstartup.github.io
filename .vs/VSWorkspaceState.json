@@ -4,7 +4,9 @@
     "\\src",
     "\\src\\content",
     "\\src\\content\\docs",
-    "\\src\\content\\docs\\knowledgebase"
+    "\\src\\content\\docs\\knowledgebase",
+    "\\src\\utils"
   ],
+  "SelectedNode": "\\astro.config.mjs",
   "PreviewInSolutionExplorer": false
 }

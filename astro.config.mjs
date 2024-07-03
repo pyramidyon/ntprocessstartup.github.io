@@ -20,7 +20,7 @@ export default defineConfig({
       link: '/'
     }, 
     {
-      label: '[list] Intro',
+      label: '[list] Introduction',
       link: '/introduction/'
     }, 
     {

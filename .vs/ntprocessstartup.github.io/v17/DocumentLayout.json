@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\root42\\Desktop\\ntprocessstartup.github.io\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\root42\\Desktop\\ntprocessstartup.github.io\\astro.config.mjs||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:astro.config.mjs||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\root42\\Desktop\\ntprocessstartup.github.io\\src\\content\\docs\\knowledgebase\\safeboot.mdx||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\content\\docs\\knowledgebase\\safeboot.mdx||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +27,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "astro.config.mjs",
+              "DocumentMoniker": "C:\\Users\\root42\\Desktop\\ntprocessstartup.github.io\\astro.config.mjs",
+              "RelativeDocumentMoniker": "astro.config.mjs",
+              "ToolTip": "C:\\Users\\root42\\Desktop\\ntprocessstartup.github.io\\astro.config.mjs",
+              "RelativeToolTip": "astro.config.mjs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAwBYAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-07-03T12:22:57.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "safeboot.mdx",
+              "DocumentMoniker": "C:\\Users\\root42\\Desktop\\ntprocessstartup.github.io\\src\\content\\docs\\knowledgebase\\safeboot.mdx",
+              "RelativeDocumentMoniker": "src\\content\\docs\\knowledgebase\\safeboot.mdx",
+              "ToolTip": "C:\\Users\\root42\\Desktop\\ntprocessstartup.github.io\\src\\content\\docs\\knowledgebase\\safeboot.mdx",
+              "RelativeToolTip": "src\\content\\docs\\knowledgebase\\safeboot.mdx",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-07-03T12:21:38.579Z",
+              "EditorCaption": ""
             }
           ]
         }
