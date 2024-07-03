@@ -3,26 +3,79 @@ title: Safemode / Safeboot
 description: Native applications run from the registry are still executed when Windows boots in safemode.
 ---
 
-In my development journey, I've made some regrettable decisions, like testing my application on my main computer. This native application crashed, causing a blue screen of death (BSOD) and presenting a significant obstacle to overcome. 
+During my research and development journey, I made the mistake of testing my native application on my main computer. This decision backfired when the application crashed, 
+resulting in a blue screen of death (BSOD) and infinite reboot loops. This situation created a significant challenge as I needed to find a way to remove the problematic registry key or file causing the crash.
 
-## Options Considered
+## Running in Windows Safemode
 
-Faced with this challenge, I considered several options to remove the problematic registry key or file:
+My initial thought was to run Windows in safemode, assuming it would bypass the execution of my native application from the registry. Contrary to my expectations, the application was still executed even in safemode, complicating my troubleshooting efforts. This unexpected behavior made it clear that safemode does not prevent the execution of all registry-based applications.
 
-### Running in Windows Safemode
+## Boot from USB
 
-I initially thought running Windows in safemode would be a simple solution. I assumed that Windows wouldn't execute my native application from the registry in this mode. However, to my surprise, the native application was still executed even when attempting to boot 'safely.' This unexpected behavior complicated my troubleshooting efforts significantly.
+At that moment, I did not have a USB drive available, so I couldn't immediately pursue this option. However, booting from a USB drive is generally a reliable way to access the system and bypass problematic applications. You will need a live operating system on the USB drive for this method. In situations like mine, I recommend trying this option first because using the Windows Fix/Repair option can resolve the issue but may also cause additional complications to the system.
 
-#### Booting from a USB Drive
+## Using the Fix/Repair Option
 
-Lacking a USB drive at the moment, I couldn't pursue this option immediately. However, booting from a USB drive is generally a reliable way to access the system without triggering the faulty application.
+Ultimately, I resorted to using the 'fix/repair' option available within the Windows recovery environment. Although this process was time-consuming, it effectively resolved the issue. The repair process allowed me to bypass the problematic application and regain control of my system.
 
-#### Using the Fix/Repair Option
+This experience taught me valuable lessons about the importance of testing applications in controlled environments. It also highlighted the persistence of registry-executed applications, even in safemode, which might inspire future strategies for dealing with similar issues.
 
-Ultimately, I resorted to using the 'fix/repair' option available within the Windows recovery environment. Although this process took a considerable amount of time, it proved effective in resolving the issue. The repair process allowed me to bypass the problematic application and regain control of my system.
+## Detecting Safemode Boot Options
 
-#### Conclusion
+Detecting safemode boot options in Windows can be challenging, as methods can be unstable and vary depending on the OS version. Many assume that accessing the registry path \\Machine\\System is impossible because the Session Manager locks it and prevents access.
 
-This experience taught me valuable lessons about the importance of testing applications in controlled environments. 
-It also highlighted the persistence of registry-executed applications, 
-even in safemode, and might bring up some idea's in the future.
+However, through extensive research and testing, I discovered that creating a new process with specific initialization parameters can bypass this lock. Even then, timing is crucial. If the function `IsSafeModeByRegistryKey` is executed too quickly, the Session Manager will still block access. By logging data from the boot sequence, I found that waiting a few milliseconds allows successful access to the registry hives. This timing may vary based on OS versions and hardware specifications. My solution involves a small delay after the 'core process' is executed to ensure reliable access.
+
+```js
+BOOLEAN IsSafeModeByRegistryKey()
+{
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objectAttributes;
+    UNICODE_STRING keyName;
+    UNICODE_STRING valueName;
+    HANDLE keyHandle;
+    ULONG resultLength;
+    DWORD safeBootOption = 0;
+
+    RtlInitUnicodeString(&keyName, L"\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\SafeBoot\\Option");
+    InitializeObjectAttributes(&objectAttributes, &keyName, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    status = NtOpenKey(&keyHandle, KEY_READ, &objectAttributes);
+    if (!NT_SUCCESS(status))
+    {
+        PrintMessageW(L"[IsSafeMode] IsSafeModeByRegistryKey NtOpenKey failed\n");
+        return FALSE;
+    }
+
+    RtlInitUnicodeString(&valueName, L"OptionValue");
+    status = NtQueryValueKey(keyHandle, &valueName, KeyValuePartialInformation, NULL, 0, &resultLength);
+    if (status == STATUS_BUFFER_TOO_SMALL)
+    {
+        PKEY_VALUE_PARTIAL_INFORMATION keyValueInformation = (PKEY_VALUE_PARTIAL_INFORMATION)RtlAllocateHeap(RtlProcessHeap(), HEAP_ZERO_MEMORY, resultLength);
+        if (keyValueInformation)
+        {
+            status = NtQueryValueKey(keyHandle, &valueName, KeyValuePartialInformation, keyValueInformation, resultLength, &resultLength);
+            if (NT_SUCCESS(status) && keyValueInformation->Type == REG_DWORD && keyValueInformation->DataLength == sizeof(DWORD))
+            {
+                safeBootOption = *(DWORD*)keyValueInformation->Data;
+                PrintMessageW(L"[IsSafeMode] Registry OptionValue = %d\n", safeBootOption);
+            }
+            else
+            {
+                PrintMessageW(L"[IsSafeMode] NtQueryValueKey failed\n");
+            }
+            RtlFreeHeap(RtlProcessHeap(), 0, keyValueInformation);
+        }
+        else
+        {
+            PrintMessageW(L"[IsSafeMode] RtlAllocateHeap failed\n");
+        }
+    }
+    else
+    {
+        PrintMessageW(L"[IsSafeMode] NtQueryValueKey initial query failed\n");
+    }
+
+    NtClose(keyHandle);
+    return (safeBootOption != 0);
+}
